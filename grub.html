@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script type="module" src="./index.js"></script>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Random grub</title>
+    <h1 class="center">Random grub</h1>
+  </head>
+  <body>
+    <script type="module" src="/location.js"></script>
+    <p class="center">
+      Click the button to generate a random resutraunt within 15 min! 🍔
+    </p>
+    <div class="div-center">
+      <button onclick="search()" id="searchButton">Find</button>
+    </div>
+    <button class="dark-mode" onclick="darkmode()" id="dark">
+      <box-icon type="solid" name="moon" id="moonIcon" color="black"></box-icon>
+    </button>
+    <button class="light-mode hidden" onclick="lightmode()" id="light">
+      <box-icon name="sun" color="white" id="sun"></box-icon>
+    </button>
+    <div class="div-center">
+      <div id="map"></div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+      ((g) => {
+        var h,
+          a,
+          k,
+          p = "The Google Maps JavaScript API",
+          c = "google",
+          l = "importLibrary",
+          q = "__ib__",
+          m = document,
+          b = window;
+        b = b[c] || (b[c] = {});
+        var d = b.maps || (b.maps = {}),
+          r = new Set(),
+          e = new URLSearchParams(),
+          u = () =>
+            h ||
+            (h = new Promise(async (f, n) => {
+              await (a = m.createElement("script"));
+              e.set("libraries", [...r] + "");
+              for (k in g)
+                e.set(
+                  k.replace(/[A-Z]/g, (t) => "_" + t[0].toLowerCase()),
+                  g[k]
+                );
+              e.set("callback", c + ".maps." + q);
+              a.src = `https://maps.${c}apis.com/maps/api/js?` + e;
+              d[q] = f;
+              a.onerror = () => (h = n(Error(p + " could not load.")));
+              a.nonce = m.querySelector("script[nonce]")?.nonce || "";
+              m.head.append(a);
+            }));
+        d[l]
+          ? console.warn(p + " only loads once. Ignoring:", g)
+          : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
+      })({ key: "AIzaSyCCXOdfzoYhugb-yWtVDNttf72bAeBoXrg", v: "beta" });
+    </script>
+  </body>
+</html>
